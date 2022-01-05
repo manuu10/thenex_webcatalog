@@ -8,7 +8,7 @@ import 'package:thenex_webcatalog/state/general/general_bloc.dart';
 import 'package:thenex_webcatalog/state/shopping_cart/shopping_cart_bloc.dart';
 import 'package:thenex_webcatalog/view/widgets/category_list_tile.dart';
 import 'package:thenex_webcatalog/view/widgets/custom_future_builder.dart';
-import 'package:thenex_webcatalog/view/widgets/search_overlay.dart';
+import 'package:thenex_webcatalog/view/widgets/page_header.dart';
 import 'package:thenex_webcatalog/view/widgets/send_request_dialog.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -22,44 +22,18 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Thenex Webcatalog',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              SizedBox(
-                width: 300,
-                child: BlocBuilder<GeneralBloc, GeneralState>(
-                  builder: (context, state) {
-                    return TextField(
-                      onTap: () => SearchOverlay.show(context),
-                      readOnly: true,
-                      controller:
-                          TextEditingController(text: state.currentSearch),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Search",
-                        prefixIcon: Icon(Icons.search),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(),
-            ],
-          ),
-          actions: [
-            BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-              builder: (context, state) {
-                return TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.shopping_bag),
-                    label: Text(state.shoppingList.length.toString()));
-              },
-            ),
-          ],
+          toolbarHeight: 250,
+          title: const PageHeader(),
+          // actions: [
+          //   BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+          //     builder: (context, state) {
+          //       return TextButton.icon(
+          //           onPressed: () {},
+          //           icon: const Icon(Icons.shopping_bag),
+          //           label: Text(state.shoppingList.length.toString()));
+          //     },
+          //   ),
+          // ],
         ),
         body: Row(
           children: [
@@ -109,7 +83,8 @@ class ProductsPage extends StatelessWidget {
                     ));
                   }
                   return GridView.builder(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8, horizontal: 100),
                     controller: prdController,
                     gridDelegate:
                         const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -129,7 +104,7 @@ class ProductsPage extends StatelessWidget {
                               SelectableText(
                                 item.bezeichnung,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               const Divider(
                                   thickness: 2, color: AppColors.primary),
@@ -137,12 +112,8 @@ class ProductsPage extends StatelessWidget {
                                 child: SelectableText(
                                   item.beschreibung,
                                   style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .color!
-                                          .withAlpha(200),
-                                      fontSize: 24),
+                                    color: AppColors.foreground.withAlpha(200),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 20),

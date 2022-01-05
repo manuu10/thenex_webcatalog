@@ -24,12 +24,23 @@ class CategoryListTile extends StatelessWidget {
             .read<ProductBloc>()
             .add(FetchProducts(category: category.name, search: ""));
       },
-      title: Text(category.getNameWithoutNumber()),
+      title: Text(
+        category.getNameWithoutNumber(),
+        style: TextStyle(
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
       trailing: Card(
-          child: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: Text(category.count.toString()),
-      )),
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Text(
+            category.count.toString(),
+            style: TextStyle(
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

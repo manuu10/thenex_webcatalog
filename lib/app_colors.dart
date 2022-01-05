@@ -4,7 +4,7 @@ abstract class AppColors {
   static const background = Color(0xFFF6F6F6);
   static const secondBackground = Colors.white;
   static const foreground = Color(0xFF181818);
-  static const primary = Colors.blueAccent;
+  static const primary = Color(0xFF1268b0);
   static const error = Colors.redAccent;
   static const warning = Colors.amberAccent;
   static const success = Colors.greenAccent;

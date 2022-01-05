@@ -30,11 +30,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        // navigatorObservers: <RouteObserver<ModalRoute<void>>>[routeObserver],
         title: 'Thenex Webkatalog',
         // theme: ThemeData.dark(),
         theme: ThemeData(
           appBarTheme: AppBarTheme(
             backgroundColor: AppColors.background,
+            foregroundColor: AppColors.foreground,
             elevation: 0,
             shape: Border(
               bottom: BorderSide(
