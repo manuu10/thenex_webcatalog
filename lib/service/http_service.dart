@@ -6,13 +6,13 @@ import 'package:thenex_webcatalog/model/category/category.dart';
 import 'package:thenex_webcatalog/model/product/product.dart';
 
 class HttpService {
-  static const _api = "http://localhost:5000";
+  static const api = "http://localhost:5000";
   @protected
   Future<http.Response> requestApi(
     String url, [
     Map<String, String> data = const {},
   ]) async {
-    final uri = Uri.parse(_api + url);
+    final uri = Uri.parse(api + url);
     Map<String, String> body = {};
     var response = await http.get(uri, headers: {
       "Accept": "application/json",

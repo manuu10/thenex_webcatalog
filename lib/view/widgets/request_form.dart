@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 
 class RequestForm extends StatelessWidget {
-  const RequestForm({Key? key, required this.formKey}) : super(key: key);
+  const RequestForm({
+    Key? key,
+    required this.compController,
+    required this.lNameController,
+    required this.fNameController,
+    required this.emailController,
+    required this.telController,
+    required this.additionalController,
+    required this.formKey,
+  }) : super(key: key);
   String? notEmptyValidator(value) {
     if (value == null || value.isEmpty) {
       return 'Please enter some text';
     }
     return null;
   }
+
+  final TextEditingController compController;
+  final TextEditingController lNameController;
+  final TextEditingController fNameController;
+  final TextEditingController emailController;
+  final TextEditingController telController;
+  final TextEditingController additionalController;
 
   final GlobalKey<FormState> formKey;
 
@@ -19,6 +35,7 @@ class RequestForm extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
+              controller: compController,
               validator: notEmptyValidator,
               decoration: const InputDecoration(
                   labelText: "Company", hintText: "Company"),
@@ -27,6 +44,7 @@ class RequestForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
+                    controller: lNameController,
                     validator: notEmptyValidator,
                     decoration: const InputDecoration(
                         labelText: "Lastname", hintText: "Lastname"),
@@ -35,6 +53,7 @@ class RequestForm extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
+                    controller: fNameController,
                     validator: notEmptyValidator,
                     decoration: const InputDecoration(
                         labelText: "Firstname", hintText: "Firstname"),
@@ -46,6 +65,7 @@ class RequestForm extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextFormField(
+                    controller: emailController,
                     validator: notEmptyValidator,
                     decoration: const InputDecoration(
                         labelText: "E-Mail", hintText: "E-Mail"),
@@ -54,6 +74,7 @@ class RequestForm extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextFormField(
+                    controller: telController,
                     validator: notEmptyValidator,
                     decoration: const InputDecoration(
                         labelText: "Tel.", hintText: "Tel."),
@@ -63,6 +84,7 @@ class RequestForm extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              controller: additionalController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   helperText: "Custom additional infomation",

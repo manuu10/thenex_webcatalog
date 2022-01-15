@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
           create: (context) => ProductBloc(context.read<GeneralBloc>()),
         ),
         BlocProvider<ShoppingCartBloc>(
-          create: (context) => ShoppingCartBloc(),
+          create: (context) =>
+              ShoppingCartBloc()..add(const LoadFromStorageEvent()),
         ),
       ],
       child: MaterialApp(

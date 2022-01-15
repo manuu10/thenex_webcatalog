@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thenex_webcatalog/model/my_request/my_request.dart';
 import 'package:thenex_webcatalog/model/product/product.dart';
+import 'package:thenex_webcatalog/model/product/product_repo.dart';
 import 'package:thenex_webcatalog/view/widgets/request_form.dart';
 
 import '../../app_colors.dart';
@@ -23,6 +25,13 @@ class SendRequestDialog extends StatefulWidget {
 
 class _SendRequestDialogState extends State<SendRequestDialog> {
   final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController compController = TextEditingController();
+  final TextEditingController lNameController = TextEditingController();
+  final TextEditingController fNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController telController = TextEditingController();
+  final TextEditingController additionalController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +63,30 @@ class _SendRequestDialogState extends State<SendRequestDialog> {
             const Divider(thickness: 2, color: AppColors.primary),
             RequestForm(
               formKey: _formKey,
+              compController: compController,
+              additionalController: additionalController,
+              emailController: emailController,
+              fNameController: fNameController,
+              lNameController: lNameController,
+              telController: telController,
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
+                MyRequest myRequest = MyRequest(
+                  product: [widget.product],
+                  company: compController.text,
+                  lastname: lNameController.text,
+                  firstname: fNameController.text,
+                  email: emailController.text,
+                  telephone: telController.text,
+                  additional: additionalController.text,
+                );
+                ProductRepo().sendRequest(myRequest);
+              },
               label: const Text("Request"),
               icon: const Icon(Icons.send),
             ),

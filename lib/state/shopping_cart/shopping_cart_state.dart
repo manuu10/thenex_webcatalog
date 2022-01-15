@@ -15,4 +15,16 @@ class ShoppingCartState extends Equatable {
       shoppingList ?? this.shoppingList,
     );
   }
+
+  Map<Product, int> productCount() {
+    Map<Product, int> map = Map<Product, int>();
+    for (var item in shoppingList) {
+      if (map.containsKey(item)) {
+        map[item] = map[item]! + 1;
+      } else {
+        map[item] = 1;
+      }
+    }
+    return map;
+  }
 }

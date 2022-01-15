@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:thenex_webcatalog/app_colors.dart';
 import 'package:thenex_webcatalog/model/category/category.dart';
 import 'package:thenex_webcatalog/model/category/category_repo.dart';
 import 'package:thenex_webcatalog/model/product/bloc/product_bloc.dart';
 import 'package:thenex_webcatalog/state/general/general_bloc.dart';
-import 'package:thenex_webcatalog/state/shopping_cart/shopping_cart_bloc.dart';
 import 'package:thenex_webcatalog/view/widgets/category_list_tile.dart';
 import 'package:thenex_webcatalog/view/widgets/custom_future_builder.dart';
 import 'package:thenex_webcatalog/view/widgets/page_header.dart';
-import 'package:thenex_webcatalog/view/widgets/send_request_dialog.dart';
+import 'package:thenex_webcatalog/view/widgets/product_card.dart';
 
 class ProductsPage extends StatelessWidget {
   static const route = "/products";
@@ -95,56 +93,7 @@ class ProductsPage extends StatelessWidget {
                     itemCount: state.products.length,
                     itemBuilder: (context, index) {
                       final item = state.products[index];
-                      return Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SelectableText(
-                                item.bezeichnung,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              const Divider(
-                                  thickness: 2, color: AppColors.primary),
-                              Expanded(
-                                child: SelectableText(
-                                  item.beschreibung,
-                                  style: TextStyle(
-                                    color: AppColors.foreground.withAlpha(200),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton.icon(
-                                      onPressed: () {
-                                        SendRequestDialog.show(context, item);
-                                      },
-                                      label: const Text("Request"),
-                                      icon: const Icon(Icons.send),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        final bloc =
-                                            context.read<ShoppingCartBloc>();
-                                        bloc.add(AddToShoppingCartEvent(item));
-                                      },
-                                      child: const Icon(Icons.add),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                      return ProductCard(product: item);
                     },
                   );
                 },

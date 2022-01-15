@@ -18,3 +18,7 @@ class RemoveFromShoppingCartEvent extends ShoppingCartEvent {
 
   const RemoveFromShoppingCartEvent(this.product);
 }
+
+class LoadFromStorageEvent extends ShoppingCartEvent {
+  const LoadFromStorageEvent();
+}
